@@ -99,3 +99,16 @@ def test_is_active_for_id_2(read_csv_file):
 
     assert actual == True, \
         f"id=2 expected True, got {actual}"
+    
+
+# In this case only INFO messages will be sent to the ReportPortal.
+def test_one(rp_logger):
+    rp_logger.info("Case1. Step1")
+
+    x = "this"
+
+    rp_logger.info("x is: %s", x)
+
+    assert 'h' in x
+
+    rp_logger.info("Execution completed")

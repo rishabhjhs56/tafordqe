@@ -2,6 +2,21 @@ import pytest
 import pandas as pd
 
 
+import logging
+
+import pytest
+
+from reportportal_client import RPLogger
+
+
+@pytest.fixture(scope="session")
+def rp_logger():
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    logging.setLoggerClass(RPLogger)
+    return logger
+
+
 # -------------------------
 # Fixture to read csv file
 # -------------------------
@@ -29,3 +44,5 @@ def pytest_collection_modifyitems(items):
     for item in items:
         if not item.own_markers:
             item.add_marker(pytest.mark.unmarked)
+
+
